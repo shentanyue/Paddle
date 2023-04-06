@@ -169,6 +169,7 @@ void MemcpySyncD2D(void* dst,
                    const phi::XPUContext& dev_ctx) {
   int dev_id = GetXPUCurrentDeviceId();
   if (dst_place.device == dev_id && src_place.device == dev_id) {
+    LOG(INFO) << "MemcpySyncD2D, steam attr:" << dev_ctx.x_context().stream();
     PADDLE_ENFORCE_XDNN_SUCCESS(
         baidu::xpu::api::copy(dev_ctx.x_context(),
                               static_cast<const int8_t*>(src),
